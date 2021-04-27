@@ -9,8 +9,9 @@ var count = 0;
 
 function addClicked(){
     var input=divInput.value;
-    count = count+input;
-    divOutput.innerHTML = count;
+    const expense = parseInt(input,10);
+    count = count+expense;
+    divOutput.textContent = count;
 }
 
 addButton.addEventListener("click",addClicked);

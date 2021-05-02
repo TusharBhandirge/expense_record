@@ -18,6 +18,7 @@ function addClicked(){
 
     expenseObj.amount = amount;
     expenseObj.desc = desc;
+    expenseObj.moment = new Date();
 
     allExpenses.push(expenseObj);
     console.clear();
@@ -27,9 +28,7 @@ function addClicked(){
     count = count+expense;
     divOutput.textContent = count;
 
-    const expenseEleArr = allExpenses.map((item)=>{
-        return `<div> ${item.amount} :: ${item.desc}`;
-    });
+    const expenseEleArr = allExpenses.map((item)=>getListElement(item));
 
     const expenseEleHtmlStr = expenseEleArr.join("");
 
@@ -39,3 +38,38 @@ function addClicked(){
 }
 
 addButton.addEventListener("click",addClicked);
+
+
+function getListElement({amount,desc,moment}){
+
+    return `
+        <li class="list-group-item d-flex justify-content-between">
+        <div class="d-flex flex-column">
+            ${desc}
+            <small class="text-muted">${getDateElement(moment)}</small>
+        </div>
+        <div>
+            <span class="px-5">
+            ${amount}
+            </span>
+            <button type="button" class="btn btn-outline-danger btn-sm">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </div>
+        </li>
+        
+        `;
+
+};
+
+function getDateElement(moment){
+
+    return moment.toLocaleDateString('en-US',{
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+}
+
+
+

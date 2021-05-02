@@ -39,7 +39,9 @@ function addClicked(){
 
 addButton.addEventListener("click",addClicked);
 
+//view Elements
 
+//add list element
 function getListElement({amount,desc,moment}){
 
     return `
@@ -52,7 +54,9 @@ function getListElement({amount,desc,moment}){
             <span class="px-5">
             ${amount}
             </span>
-            <button type="button" class="btn btn-outline-danger btn-sm">
+            <button 
+            onclick='deleteItem(${moment.valueOf()})'
+            type="button" class="btn btn-outline-danger btn-sm">
                 <i class="fas fa-trash-alt"></i>
             </button>
         </div>
@@ -62,6 +66,40 @@ function getListElement({amount,desc,moment}){
 
 };
 
+
+function renderList(arrayList){
+
+
+    
+}
+
+
+
+
+//delete elment 
+
+function deleteItem(dateValue){
+
+    var newArray=[];
+    console.log("delete item clicked");
+    for(var i = 0; i<allExpenses.length; i++){
+        if(allExpenses[i].moment.valueOf() !== dateValue){
+            newArray.push(allExpenses[i]);
+        }
+    }
+
+    const expenseEleArr = newArray.map((item)=>getListElement(item));
+
+    const expenseEleHtmlStr = expenseEleArr.join("");
+
+
+    expenseEle.innerHTML = expenseEleHtmlStr;
+    
+
+}
+
+
+//controler element
 function getDateElement(moment){
 
     return moment.toLocaleDateString('en-US',{

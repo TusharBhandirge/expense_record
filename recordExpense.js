@@ -16,18 +16,28 @@ function addClicked(){
     var amount=inputAmount.value;
     var desc = inputDesc.value;
 
-    expenseObj.amount = amount;
-    expenseObj.desc = desc;
-    expenseObj.moment = new Date();
+    
 
-    allExpenses.push(expenseObj);
-    console.clear();
-    console.table(allExpenses);
+    
+    //console.clear();
+    //console.table(allExpenses);
 
-    const expense = parseInt(amount,10);
-    count = count+expense;
-    divOutput.textContent = count;
+    
+    if(isNaN(amount) || amount===""){
+        console.log("in if");
+        alert("kindly put numeric values in amount field");
+    }else{
+        console.log("inside else");
+        const expense = parseInt(amount,10);
+        count = count+expense;
 
+        expenseObj.amount = amount;
+        expenseObj.desc = desc;
+        expenseObj.moment = new Date();
+        divOutput.textContent = count;
+        allExpenses.push(expenseObj);
+    }
+    
     clearInputFileds();
 
     renderList(allExpenses);

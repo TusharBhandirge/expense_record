@@ -5,7 +5,7 @@ var divOutput = document.querySelector("#div-output");
 var inputAmount = document.querySelector("#input-id-amount");
 var inputDesc = document.querySelector("#input-id-desc");
 var expenseEle = document.querySelector('#id-Expense-table');
-const allExpenses = [];
+var allExpenses = [];
 var count = 0;
 
 
@@ -28,12 +28,9 @@ function addClicked(){
     count = count+expense;
     divOutput.textContent = count;
 
-    const expenseEleArr = allExpenses.map((item)=>getListElement(item));
+    clearInputFileds();
 
-    const expenseEleHtmlStr = expenseEleArr.join("");
-
-
-    expenseEle.innerHTML = expenseEleHtmlStr;
+    renderList(allExpenses);
 
 }
 
@@ -69,8 +66,13 @@ function getListElement({amount,desc,moment}){
 
 function renderList(arrayList){
 
+    const expenseEleArr = arrayList.map((item)=>getListElement(item));
 
-    
+    const expenseEleHtmlStr = expenseEleArr.join("");
+
+
+    expenseEle.innerHTML = expenseEleHtmlStr;
+
 }
 
 
@@ -87,13 +89,8 @@ function deleteItem(dateValue){
             newArray.push(allExpenses[i]);
         }
     }
-
-    const expenseEleArr = newArray.map((item)=>getListElement(item));
-
-    const expenseEleHtmlStr = expenseEleArr.join("");
-
-
-    expenseEle.innerHTML = expenseEleHtmlStr;
+    renderList(newArray);
+    allExpenses = newArray;
     
 
 }
@@ -109,5 +106,11 @@ function getDateElement(moment){
     });
 }
 
+
+function clearInputFileds(){
+    inputAmount.value='';
+    inputDesc.value = '';
+
+}
 
 
